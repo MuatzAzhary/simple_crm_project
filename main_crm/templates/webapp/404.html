@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="m-5 p-5 rounded-4 bg-dark text-center">
+    <h1 class="fs-1 text-primary bold">404</h1>
+    <h3 class="fs-4 mt-3">PAGE NOT FOUND !</h3>
+    <p>Sorry! the page you are looking for is nout found!</p>
+    <a href="{% url 'dashboard' %}" class="btn btn-outline-info mt-3">Return to Dashboard</a>
+</div>
+{% endblock %}

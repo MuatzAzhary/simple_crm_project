@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row m-5">
+    <div class="col-lg-6">
+        <h2 id="nav-breadcrumbs">Activites</h2>
+        <div class="bs-component">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Activites</li>
+            </ol>
+        </div>
+    </div>
+    <div class="col-lg-6 d-flex justify-content-end align-items-center ">
+        <a  class="btn btn-primary" href="{% url 'create_activity' %}">Record New Activity</a>
+    </div>
+</div>
+<div class="m-5">
+    {% if activities %}
+    <table class="table table-hover m-3">
+        <thead>
+          <tr>
+            <th scope="col">Activity Id</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Activity Type</th>
+            <th scope="col">Assigned To</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for activity in activities %}
+                <tr class="table-active">
+                    <th >{{activity.id}}</th>
+                    <td>{{activity.customer.first_name}} {{activity.customer.last_name}}</td>
+                    <td>{{activity.activity_type.type_name}}</td>
+                    <td>{{activity.employee.full_name}}</td>
+                    <td>
+                        <a href="{% url 'activity' activity.id %}" class="btn btn-primary btn-sm">View</a>
+                    </td>
+                </tr>
+            {% endfor %}
+    
+        </tbody>
+      </table>
+    {% else %}
+    <div class="alert alert-dismissible alert-light">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Heads up!</strong> You dont have any records yet, Add some records.
+      </div>
+    {% endif %}
+</div>
+{% endblock %}

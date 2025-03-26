@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row m-5">
+    <div class="col-lg-6">
+        <h2 id="nav-breadcrumbs">Customers</h2>
+        <div class="bs-component">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Customers</li>
+            </ol>
+        </div>
+    </div>
+    <div class="col-lg-6 d-flex justify-content-end align-items-center ">
+        <a  class="btn btn-primary" href="{% url 'create_customer' %}">Add New Customer</a>
+    </div>
+</div>
+<div class="m-5">
+    <table class="table table-hover m-3">
+        <thead>
+          <tr>
+            <th scope="col">Customer Id</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Company</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+                <tr class="table-active">
+                    <th >{{customer.id}}</th>
+                    <td>{{customer.first_name}} {{customer.last_name}}</td>
+                    <td>{{customer.email}}</td>
+                    <td>{{customer.phone}}</td>
+                    <td>{{customer.company}}</td>
+                    <td>
+                        {% if customer.status == 'A'  %}
+                            <span class="badge bg-success">Active</span>
+                        {% else %}
+                            <span class="badge bg-danger">Un Active</span>
+                        {% endif%}
+                    </td>
+                </tr>
+            {% endfor %}
+    
+        </tbody>
+      </table>
+</div>
+{% endblock %}
